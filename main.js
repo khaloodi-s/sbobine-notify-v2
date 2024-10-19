@@ -23,9 +23,21 @@ client.on('qr', qr => {
     qrcode.generate(qr, { small: true });
 });
 
-client.on('ready', () => {
+client.on('ready', async () => {
     console.log('Client is ready!');
     clientReady = true; // Set to true when client is ready
+
+    try {
+        // Fetch all chats
+        const chats = await client.getChats();
+        
+        // Log each chat's ID and name
+        chats.forEach(chat => {
+            console.log(`Chat ID: ${chat.id._serialized}, Name: ${chat.name || 'No Name'}`);
+        });
+    } catch (error) {
+        console.error('Error fetching chats:', error);
+    }
 });
 
 client.on('disconnected', () => {
