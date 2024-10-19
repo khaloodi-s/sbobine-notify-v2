@@ -52,7 +52,6 @@ RUN apt-get update && apt-get install -y \
     libnspr4 \
     libxshmfence1 \
     libglib2.0-0 \
-    libgobject-2.0-0 \
     libpango1.0-0 \
     libatk-bridge2.0-0 \
     libdrm2 \
