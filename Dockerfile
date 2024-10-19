@@ -20,6 +20,35 @@ FROM base as build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
+# Install required packages for running Chromium
+RUN apt-get update && apt-get install -y \
+  wget \
+  gnupg2 \
+  libgtk-3-0 \
+  libx11-xcb1 \
+  libxcomposite1 \
+  libxdamage1 \
+  libxrandr2 \
+  libasound2 \
+  libatk1.0-0 \
+  libcups2 \
+  libdbus-1-3 \
+  libgconf-2-4 \
+  libnss3 \
+  libxss1 \
+  libxtst6 \
+  fonts-liberation \
+  libappindicator3-1 \
+  libgdk-pixbuf2.0-0 \
+  libnspr4 \
+  libxshmfence1 \
+  libgobject-2.0-0 \ # Added this line
+  --no-install-recommends \
+  && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
 # Install node modules
 COPY package-lock.json package.json ./
 RUN npm ci
