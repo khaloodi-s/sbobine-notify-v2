@@ -20,7 +20,7 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
 # Install node modules
-COPY package-lock.json package.json ./
+COPY package-lock.json package.json ./ 
 RUN npm ci
 
 # Copy application code
@@ -29,7 +29,7 @@ COPY . .
 # Final stage for app image
 FROM base
 
-# Install required packages for running Chromium
+# Install required packages for running Chromium and Puppeteer
 RUN apt-get update && apt-get install -y \
     wget \
     gnupg2 \
@@ -52,12 +52,19 @@ RUN apt-get update && apt-get install -y \
     libnspr4 \
     libxshmfence1 \
     libglib2.0-0 \
+    libgobject-2.0-0 \
+    libpango1.0-0 \
+    libatk-bridge2.0-0 \
+    libdrm2 \   # Missing library for Chromium
+    libgbm1 \   # Useful for headless Chromium
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy built application
+# Copy built application from build stage
 COPY --from=build /app /app
 
-# Start the server by default, this can be overwritten at runtime
+# Expose port 3000 for the app
 EXPOSE 3000
+
+# Start the server by default, this can be overwritten at runtime
 CMD [ "npm", "run", "start" ]
