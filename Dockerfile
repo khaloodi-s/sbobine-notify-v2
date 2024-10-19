@@ -22,29 +22,29 @@ RUN apt-get update -qq && \
 
 # Install required packages for running Chromium
 RUN apt-get update && apt-get install -y \
-  wget \
-  gnupg2 \
-  libgtk-3-0 \
-  libx11-xcb1 \
-  libxcomposite1 \
-  libxdamage1 \
-  libxrandr2 \
-  libasound2 \
-  libatk1.0-0 \
-  libcups2 \
-  libdbus-1-3 \
-  libgconf-2-4 \
-  libnss3 \
-  libxss1 \
-  libxtst6 \
-  fonts-liberation \
-  libappindicator3-1 \
-  libgdk-pixbuf2.0-0 \
-  libnspr4 \
-  libxshmfence1 \
-  libgobject-2.0-0 \ # Added this line
-  --no-install-recommends \
-  && rm -rf /var/lib/apt/lists/*
+    wget \
+    gnupg2 \
+    libx11-xcb1 \
+    libgtk-3-0 \
+    libxdamage1 \
+    libxcomposite1 \
+    libasound2 \
+    libxrandr2 \
+    libcups2 \
+    libdbus-1-3 \
+    libgconf-2-4 \
+    libnss3 \
+    libxss1 \
+    libxtst6 \
+    fonts-liberation \
+    libappindicator3-1 \
+    libgdk-pixbuf2.0-0 \
+    libnspr4 \
+    libxshmfence1 \
+    libgobject-2.0-0 \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
+    libatk1.0-0 \
 
 # Set working directory
 WORKDIR /app
