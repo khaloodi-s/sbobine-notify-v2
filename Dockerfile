@@ -55,8 +55,8 @@ RUN apt-get update && apt-get install -y \
     libgobject-2.0-0 \
     libpango1.0-0 \
     libatk-bridge2.0-0 \
-    libdrm2 \   # Missing library for Chromium
-    libgbm1 \   # Useful for headless Chromium
+    libdrm2 \
+    libgbm1 \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
