@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -y \
     libxdamage1 \
     libxcomposite1 \
     libasound2 \
+    libatk1.0-0 \
     libxrandr2 \
     libcups2 \
     libdbus-1-3 \
@@ -44,7 +45,6 @@ RUN apt-get update && apt-get install -y \
     libgobject-2.0-0 \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
-    libatk1.0-0 \
 
 # Set working directory
 WORKDIR /app
