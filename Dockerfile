@@ -20,6 +20,16 @@ FROM base as build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
 
+# Install node modules
+COPY package-lock.json package.json ./
+RUN npm ci
+
+# Copy application code
+COPY . .
+
+# Final stage for app image
+FROM base
+
 # Install required packages for running Chromium
 RUN apt-get update && apt-get install -y \
     wget \
@@ -42,23 +52,9 @@ RUN apt-get update && apt-get install -y \
     libgdk-pixbuf2.0-0 \
     libnspr4 \
     libxshmfence1 \
-    libgobject-2.0.so.0 \
+    libgobject-2.0-0 \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
-
-# Set working directory
-WORKDIR /app
-
-# Install node modules
-COPY package-lock.json package.json ./
-RUN npm ci
-
-# Copy application code
-COPY . .
-
-
-# Final stage for app image
-FROM base
 
 # Copy built application
 COPY --from=build /app /app
