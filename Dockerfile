@@ -52,7 +52,7 @@ RUN apt-get update && apt-get install -y \
     libgdk-pixbuf2.0-0 \
     libnspr4 \
     libxshmfence1 \
-    libgobject-2.0-0 \
+    libgobject-2.0.so.0 \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
