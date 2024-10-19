@@ -1,7 +1,7 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const qrcode = require('qrcode-terminal');
 const express = require('express');
-const bodyParser = require('bodyParser');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3000;
