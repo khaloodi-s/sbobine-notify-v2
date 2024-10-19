@@ -33,8 +33,6 @@ client.on('disconnected', () => {
     clientReady = false; // Set to false when the client disconnects
 });
 
-client.initialize();
-
 // Listening to all incoming messages
 client.on('message_create', message => {
     console.log(message.body);
@@ -66,6 +64,8 @@ app.post('/send-message', async (req, res) => {
         res.status(500).send({ success: false, error: error.message });
     }
 });
+
+client.initialize();
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
